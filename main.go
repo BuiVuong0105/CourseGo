@@ -8,6 +8,8 @@ import (
 	"fmt"
 	"sync"
 	"time"
+
+	"rsc.io/quote"
 )
 
 func goroutineExample() {
@@ -102,6 +104,7 @@ func init() {
 }
 
 func main() {
+	fmt.Println(quote.Go())
 	// test := test
 	// test()
 	// fmt.Println()
