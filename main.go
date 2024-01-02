@@ -3,13 +3,15 @@ package main
 import (
 	"context"
 	"course/domain"
-	"course/pattern/builder"
-	"course/pattern/singleton"
 	"fmt"
+	"log"
+	"net/http"
+	"os"
 	"sync"
 	"time"
 
-	"rsc.io/quote"
+	"github.com/rs/cors"
+	"github.com/spf13/cobra"
 )
 
 func goroutineExample() {
@@ -103,8 +105,77 @@ func init() {
 	fmt.Println("INIT SYSTEM")
 }
 
+const (
+	httpReadTimeout  = 2 * time.Minute
+	httpWriteTimeout = time.Hour
+)
+
+var (
+	listenAddr = 3000
+)
+
+const (
+	flagAddr   = "addr"
+	flagDBPath = "db_path"
+	flagEnv    = "env"
+)
+
+// StartCommand ...
+func StartCommand() *cobra.Command {
+	var listenAddr, dbPath, envName string
+	cmd := &cobra.Command{
+		Use:   "start",
+		Short: "start server ",
+		RunE: func(cmd *cobra.Command, args []string) error {
+			return StartServer(listenAddr, dbPath, envName)
+		},
+	}
+	cmd.Flags().StringVarP(&listenAddr, flagAddr, "1", ":3000", "Address to open rest server")
+	cmd.Flags().StringVarP(&dbPath, flagDBPath, "2", os.ExpandEnv("$HOME/.hashcode"), "db path")
+	cmd.Flags().StringVarP(&envName, flagEnv, "3", "", "env default: prod")
+	return cmd
+}
+
+// StartServer ...
+func StartServer(listenAddr, dbPath, envName string) error {
+
+	// handler, err := core.Run("35056997918317u85346cccx3i@123", store, envName)
+	// if err != nil {
+	// 	return err
+	// }
+
+	c := cors.New(cors.Options{
+		AllowedOrigins:   []string{"*"},
+		AllowCredentials: true,
+		// Enable Debugging for testing, consider disabling in production
+		Debug: false,
+	})
+
+	h := c.Handler(nil)
+
+	srv := &http.Server{
+		Handler: h,
+		Addr:    listenAddr,
+		// Good practice: enforce timeouts for servers you create!
+		WriteTimeout: httpWriteTimeout,
+		ReadTimeout:  httpReadTimeout,
+	}
+	log.Printf("http listening on port http://localhost%s", listenAddr)
+	return srv.ListenAndServe()
+}
+
 func main() {
-	fmt.Println(quote.Go())
+
+	rootCmd := &cobra.Command{}
+	cobra.EnableCommandSorting = false
+	rootCmd.AddCommand(StartCommand())
+	err := rootCmd.Execute()
+	if err != nil {
+		// handle with #870
+		panic(err)
+	}
+
+	// fmt.Println(quote.Go())
 	// test := test
 	// test()
 	// fmt.Println()
@@ -117,9 +188,12 @@ func main() {
 	// domain.RunWorkCompose()
 	// domain.RunInterface()
 	// domain.CaculateSQRT()
+	// hashCode := domain.NewHashCode()
+	// qrCodes := hashCode.EndCode(26691, 1000000)
+	// fmt.Println(qrCodes)
 	// runTimeOut()
-	singleton.TestSingletonPattern()
-	builder.TestBuilder()
+	// singleton.TestSingletonPattern()
+	// builder.TestBuilder()
 
 	// wg := sync.WaitGroup{}
 	// wg.Add(2)
