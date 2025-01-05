@@ -164,49 +164,49 @@ func StartServer(listenAddr, dbPath, envName string) error {
 	return srv.ListenAndServe()
 }
 
-func main() {
+// func main() {
 
-	rootCmd := &cobra.Command{}
-	cobra.EnableCommandSorting = false
-	rootCmd.AddCommand(StartCommand())
-	err := rootCmd.Execute()
-	if err != nil {
-		// handle with #870
-		panic(err)
-	}
+// rootCmd := &cobra.Command{}
+// cobra.EnableCommandSorting = false
+// rootCmd.AddCommand(StartCommand())
+// err := rootCmd.Execute()
+// if err != nil {
+// 	// handle with #870
+// 	panic(err)
+// }
 
-	// fmt.Println(quote.Go())
-	// test := test
-	// test()
-	// fmt.Println()
-	// goroutineExample()
-	// caculate()
-	// anynomouseFunction()
-	// domain.RunWriter()
-	// domain.RunIncrement()
-	// domain.RunCompose()
-	// domain.RunWorkCompose()
-	// domain.RunInterface()
-	// domain.CaculateSQRT()
-	// hashCode := domain.NewHashCode()
-	// qrCodes := hashCode.EndCode(26691, 1000000)
-	// fmt.Println(qrCodes)
-	// runTimeOut()
-	// singleton.TestSingletonPattern()
-	// builder.TestBuilder()
+// fmt.Println(quote.Go())
+// test := test
+// test()
+// fmt.Println()
+// goroutineExample()
+// caculate()
+// anynomouseFunction()
+// domain.RunWriter()
+// domain.RunIncrement()
+// domain.RunCompose()
+// domain.RunWorkCompose()
+// domain.RunInterface()
+// domain.CaculateSQRT()
+// hashCode := domain.NewHashCode()
+// qrCodes := hashCode.EndCode(26691, 1000000)
+// fmt.Println(qrCodes)
+// runTimeOut()
+// singleton.TestSingletonPattern()
+// builder.TestBuilder()
 
-	// wg := sync.WaitGroup{}
-	// wg.Add(2)
-	// resultChannel := make(chan int, 2)
+// wg := sync.WaitGroup{}
+// wg.Add(2)
+// resultChannel := make(chan int, 2)
 
-	// go func() {
-	// 	fmt.Println("RS: ", <-resultChannel) // Đoc channel nếu đọc mà không có data thì báo lỗi
-	// 	wg.Done()
-	// }()
-	// go func() {
-	// 	resultChannel <- 42 // khi gửi vào thì nếu vượt quá buffer mà channel không có ai đăng ký nhận sẽ bị báo lỗi
-	// 	wg.Done()
-	// }()
-	// wg.Wait()
+// go func() {
+// 	fmt.Println("RS: ", <-resultChannel) // Đoc channel nếu đọc mà không có data thì báo lỗi
+// 	wg.Done()
+// }()
+// go func() {
+// 	resultChannel <- 42 // khi gửi vào thì nếu vượt quá buffer mà channel không có ai đăng ký nhận sẽ bị báo lỗi
+// 	wg.Done()
+// }()
+// wg.Wait()
 
-}
+// }
