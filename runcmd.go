@@ -108,7 +108,9 @@ func readerEx() {
 }
 
 func main() {
-	readerEx()
+	var c entity.Vertex
+	fmt.Println(c)
+	// readerEx()
 	// methodRecever()
 	// domain.RunInterface()
 	// checkNill()

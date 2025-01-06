@@ -28,3 +28,8 @@ func UpdateInforValue(customer CustomerEntity, code string, name string) {
 	customer.code = code
 	customer.name = name
 }
+
+type Vertex struct {
+	X int
+	Y int
+}
