@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"course/domain"
+	"course/entity"
 	"fmt"
 	"log"
 	"net/http"
@@ -164,16 +165,59 @@ func StartServer(listenAddr, dbPath, envName string) error {
 	return srv.ListenAndServe()
 }
 
-func main() {
+func changeStruct() {
+	order := entity.Order{Code: "O1"}
+	fmt.Println("ORDER:", order)
+	pOrder := &order
+	fmt.Println("PORDER:", pOrder)
+	pOrder.Code = "02"
+	fmt.Println("ORDER:", order)
+	fmt.Println("PORDER:", pOrder)
 
-	rootCmd := &cobra.Command{}
-	cobra.EnableCommandSorting = false
-	rootCmd.AddCommand(StartCommand())
-	err := rootCmd.Execute()
-	if err != nil {
-		// handle with #870
-		panic(err)
+	code := &order.Code
+	*code = "03"
+	fmt.Println("ORDER:", order)
+	fmt.Println("PORDER:", pOrder)
+}
+
+func sliceDemo() {
+	primes := [6]int{2, 3, 5, 7, 11, 13} // tao mảng 6 phần tử
+	fmt.Printf("Prime Init: %v  with: Leng: %v,  cap: %v \n", primes, len(primes), cap(primes))
+
+	s := primes[1:4] // Tạo slice từ mảng từ index 1 -> index 4 (exclude)
+	fmt.Printf("Silce Init: %v  with lenght: %v cap: %v \n", s, len(s), cap(s))
+
+	s = append(s, 10) // write 50 vào slice ở vị trị tiếp theo
+	fmt.Printf("Silce After Append One Element: %v  with cap: %v \n", s, cap(s))
+	fmt.Printf("Prime After Append One Element To Slice: %v  with cap: %v \n", primes, cap(primes))
+
+	s = append(s, 20, 30, 40, 50, 500)
+	fmt.Printf("Silce After Append Multiple Element: %v  with cap: %v \n", s, cap(s))
+	fmt.Printf("Prime After Append Multiple Element To Slice: %v  with cap: %v \n", primes, cap(primes))
+
+	primes[1] = 9999
+	fmt.Printf("Silce After Edit Value Of Array: %v  with cap: %v \n", s, cap(s))
+	fmt.Printf("Prime After Edit Value Of Array: %v  with cap: %v \n", primes, cap(primes))
+
+	points := make([]int, 9, 10)
+	fmt.Printf("Point init: %v  Length: %v, Cap: %v \n", points, len(points), cap(points))
+
+	for index, v := range s {
+		fmt.Printf("Index: %v, value: %v \n", index, v)
 	}
+}
+
+func main() {
+	// changeStruct()
+	sliceDemo()
+	// rootCmd := &cobra.Command{}
+	// cobra.EnableCommandSorting = false
+	// rootCmd.AddCommand(StartCommand())
+	// err := rootCmd.Execute()
+	// if err != nil {
+	// 	// handle with #870
+	// 	panic(err)
+	// }
 
 	// fmt.Println(quote.Go())
 	// test := test
@@ -194,7 +238,6 @@ func main() {
 	// runTimeOut()
 	// singleton.TestSingletonPattern()
 	// builder.TestBuilder()
-
 	// wg := sync.WaitGroup{}
 	// wg.Add(2)
 	// resultChannel := make(chan int, 2)
