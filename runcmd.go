@@ -108,8 +108,8 @@ func readerEx() {
 }
 
 func main() {
-	var c entity.Vertex
-	fmt.Println(c)
+	domain.RunConcurrency()
+	// domain.RundCmd()
 	// readerEx()
 	// methodRecever()
 	// domain.RunInterface()
