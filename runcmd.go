@@ -3,8 +3,10 @@ package main
 import (
 	"course/domain"
 	"course/entity"
+	"encoding/json"
 	"fmt"
 	"io"
+	"log"
 	"strings"
 	"time"
 )
@@ -107,8 +109,33 @@ func readerEx() {
 	}
 }
 
+func jsonDemo() {
+	now := time.Now().UTC()
+	var order *entity.Order = &entity.Order{
+		Id:        1,
+		Code:      "A",
+		Status:    "ACTIVE",
+		CreatedAt: &now,
+		UpdatedAt: &now,
+	}
+
+	jsonData, err := json.Marshal(order)
+	if err != nil {
+		log.Printf("ERROR: %s", err)
+		return
+	}
+	jsonString := string(jsonData)
+	log.Printf("jsonString: %v", jsonString)
+
+	var order2 *entity.Order = &entity.Order{}
+	json.Unmarshal([]byte(jsonData), order2)
+
+	log.Printf("order2: %v", *order2)
+}
+
 func main() {
-	domain.RunConcurrency()
+	jsonDemo()
+	// domain.RunConcurrency()
 	// domain.RundCmd()
 	// readerEx()
 	// methodRecever()
