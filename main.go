@@ -212,6 +212,10 @@ func sliceDemo() {
 }
 
 func sliceDemo2() {
+
+	s := struct{ ID int }{ID: 1}
+	fmt.Println(s)
+
 	point := [6]int{2, 3, 5, 7, 11, 13}
 	fmt.Printf("Prime Init: %v  with: Leng: %v,  cap: %v \n", point, len(point), cap(point))
 
@@ -222,6 +226,27 @@ func sliceDemo2() {
 	if nillSlice == nil {
 		fmt.Println("Nill Slice: %v", nillSlice)
 	}
+}
+
+type Person struct {
+	ID   int
+	Name string
+	Age  int
+}
+
+func checkMap() {
+	people := make(map[struct{ ID int }]Person)
+
+	p1 := Person{ID: 1, Name: "John", Age: 30}
+	p2 := Person{ID: 2, Name: "Alice", Age: 25}
+
+	// Chỉ sử dụng ID làm key
+	people[struct{ ID int }{ID: p1.ID}] = p1
+	people[struct{ ID int }{ID: p2.ID}] = p2
+
+	// Truy xuất bằng ID
+	fmt.Println(people[struct{ ID int }{ID: 1}]) // Output: {1 John 30}
+	fmt.Println(people[struct{ ID int }{ID: 2}]) // Output: {2 Alice 25}
 }
 
 func main() {
