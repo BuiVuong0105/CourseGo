@@ -138,7 +138,8 @@ func jsonDemo() {
 }
 
 func main() {
-	methodRecever()
+	domain.RunInterface()
+	// methodRecever()
 	// 	now := time.Now().UTC()
 	// 	var orders [2]entity.Order
 	// 	var orderPointer *[2]entity.Order = &orders

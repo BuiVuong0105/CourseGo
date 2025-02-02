@@ -32,7 +32,7 @@ type MyStructPointer struct {
 /// implement Interface chỉ nhận giá trị địa chỉ
 func (msp *MyStructPointer) SetName(name string) {
 	msp.Name = name
-	fmt.Println("Method called on value: ", msp.Name)
+	fmt.Println("Method called on Pointer: ", msp.Name)
 }
 
 func (msp *MyStructPointer) GetName() string {
@@ -47,7 +47,7 @@ func (msv *MyStructPointer) MethodSpecial(name string) {
 func RunInterface() {
 
 	var myStructValueImpl MyInterface = &MyStructValue{}
-	myStructValueImpl.SetName("AAAAA")
+	myStructValueImpl.SetName("AAAAA") // tự động chuyển thành giá trị và clone object mới rồi setName trên object mới đó
 	println("myStructValueImpl", myStructValueImpl.GetName())
 
 	myStructValueImpl = MyStructValue{}
