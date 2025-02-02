@@ -133,18 +133,40 @@ func jsonDemo() {
 	log.Printf("order2: %v", *order2)
 }
 
-func main() {
-	jsonDemo()
-	// domain.RunConcurrency()
-	// domain.RundCmd()
-	// readerEx()
-	// methodRecever()
-	// domain.RunInterface()
-	// checkNill()
-	// assertionType()
-	// do(true)
+// func main() {
+// 	now := time.Now().UTC()
+// 	var orders [2]entity.Order
+// 	var orderPointer *[2]entity.Order = &orders
 
-	// if err := run(); err != nil {
-	// 	fmt.Println(err)
-	// }
-}
+// 	orders[0] = entity.Order{
+// 		Id:        1,
+// 		Code:      "A",
+// 		Status:    "ACTIVE",
+// 		CreatedAt: &now,
+// 		UpdatedAt: &now,
+// 	}
+
+// 	orders[1] = entity.Order{
+// 		Id:        2,
+// 		Code:      "A",
+// 		Status:    "ACTIVE",
+// 		CreatedAt: &now,
+// 		UpdatedAt: &now,
+// 	}
+
+// 	log.Println("ORDERs: ", orders)
+// 	log.Println("orderPointer: ", orderPointer)
+// 	// jsonDemo()
+// 	// domain.RunConcurrency()
+// 	// domain.RundCmd()
+// 	// readerEx()
+// 	// methodRecever()
+// 	// domain.RunInterface()
+// 	// checkNill()
+// 	// assertionType()
+// 	// do(true)
+
+// 	// if err := run(); err != nil {
+// 	// 	fmt.Println(err)
+// 	// }
+// }
