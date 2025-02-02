@@ -19,17 +19,21 @@ func methodRecever() {
 
 	entity.UpdateInforPointer(customerEntityPointer, "ptV1", "ptV2")
 	fmt.Println("customerEntityPointer by Function: ", customerEntityPointer)
-	customerEntityPointer.UpdateInforValue("ptV1", "ptV2")
+	customerEntityPointer.UpdateInforValue("ptVv1", "ptVv2")
 	fmt.Println("customerEntityPointer by method: ", customerEntityPointer)
 
 	customerEntityValue := entity.CustomerEntity{}
 	customerEntityValue.UpdateInforValue("vl1", "vl2")
 	fmt.Println("customerEntityValue by method: ", customerEntityValue)
+
 	(&customerEntityValue).UpdateInforValue("vl1", "vl2") // TỰ LẤY (*(&customerEntityValue)) ( PASS VALUE)
 	fmt.Println("customerEntityValue by method: ", customerEntityValue)
 
 	entity.UpdateInforValue(customerEntityValue, "vl1", "vl2")
 	fmt.Println("customerEntityValue by function: ", customerEntityValue)
+
+	customerEntityValue.UpdateInforPointer("vl1", "vl2")
+	fmt.Println("customerEntityValue by method: ", customerEntityValue)
 
 }
 
@@ -133,40 +137,41 @@ func jsonDemo() {
 	log.Printf("order2: %v", *order2)
 }
 
-// func main() {
-// 	now := time.Now().UTC()
-// 	var orders [2]entity.Order
-// 	var orderPointer *[2]entity.Order = &orders
+func main() {
+	methodRecever()
+	// 	now := time.Now().UTC()
+	// 	var orders [2]entity.Order
+	// 	var orderPointer *[2]entity.Order = &orders
 
-// 	orders[0] = entity.Order{
-// 		Id:        1,
-// 		Code:      "A",
-// 		Status:    "ACTIVE",
-// 		CreatedAt: &now,
-// 		UpdatedAt: &now,
-// 	}
+	// 	orders[0] = entity.Order{
+	// 		Id:        1,
+	// 		Code:      "A",
+	// 		Status:    "ACTIVE",
+	// 		CreatedAt: &now,
+	// 		UpdatedAt: &now,
+	// 	}
 
-// 	orders[1] = entity.Order{
-// 		Id:        2,
-// 		Code:      "A",
-// 		Status:    "ACTIVE",
-// 		CreatedAt: &now,
-// 		UpdatedAt: &now,
-// 	}
+	// 	orders[1] = entity.Order{
+	// 		Id:        2,
+	// 		Code:      "A",
+	// 		Status:    "ACTIVE",
+	// 		CreatedAt: &now,
+	// 		UpdatedAt: &now,
+	// 	}
 
-// 	log.Println("ORDERs: ", orders)
-// 	log.Println("orderPointer: ", orderPointer)
-// 	// jsonDemo()
-// 	// domain.RunConcurrency()
-// 	// domain.RundCmd()
-// 	// readerEx()
-// 	// methodRecever()
-// 	// domain.RunInterface()
-// 	// checkNill()
-// 	// assertionType()
-// 	// do(true)
+	// 	log.Println("ORDERs: ", orders)
+	// 	log.Println("orderPointer: ", orderPointer)
+	// 	// jsonDemo()
+	// 	// domain.RunConcurrency()
+	// 	// domain.RundCmd()
+	// 	// readerEx()
+	// 	// methodRecever()
+	// 	// domain.RunInterface()
+	// 	// checkNill()
+	// 	// assertionType()
+	// 	// do(true)
 
-// 	// if err := run(); err != nil {
-// 	// 	fmt.Println(err)
-// 	// }
-// }
+	// 	// if err := run(); err != nil {
+	// 	// 	fmt.Println(err)
+	// 	// }
+}
