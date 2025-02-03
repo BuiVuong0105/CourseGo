@@ -138,7 +138,8 @@ func jsonDemo() {
 }
 
 func main() {
-	domain.RunInterface()
+	entity.TestS()
+	// domain.RunInterface()
 	// methodRecever()
 	// 	now := time.Now().UTC()
 	// 	var orders [2]entity.Order
@@ -163,7 +164,7 @@ func main() {
 	// 	log.Println("ORDERs: ", orders)
 	// 	log.Println("orderPointer: ", orderPointer)
 	// 	// jsonDemo()
-	// 	// domain.RunConcurrency()
+	// domain.RunConcurrency()
 	// 	// domain.RundCmd()
 	// 	// readerEx()
 	// 	// methodRecever()
