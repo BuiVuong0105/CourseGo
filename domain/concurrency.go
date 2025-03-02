@@ -29,9 +29,12 @@ func sendMultiData() {
 		for i := 1; i <= 5; i++ {
 			ch <- i
 			log.Printf("Send Success To Channel Value: %v", i)
+			time.Sleep(time.Second * 2)
 		}
-		close(ch)
+		close(ch) // close rồi thì nếu có lệnh lấy ra sẽ trả về 0
 	}()
+
+	// Duyệt qua channel nếu channel đã close trong quá trình duyệt thì sẽ break
 	for v := range ch {
 		log.Printf("Fetch Value From Channel: %v", v)
 	}
@@ -44,7 +47,7 @@ func sendMultiData() {
 	// 	log.Printf("Fetch Value From Channel: %v, %v", number, ok)
 	// }
 
-	// for i := 1; i <= 10; i++ {
+	// for i := 1; i <= 6; i++ {
 	// 	number := <-ch
 	// 	log.Printf("Fetch Value From Channel: %v", number)
 	// }
@@ -94,7 +97,7 @@ func selectDemo() {
 
 func RunConcurrency() {
 	// baseSendAndReceive()
-	// sendMultiData()
+	sendMultiData()
 	// executeSum()
 	// selectDemo()
 }
