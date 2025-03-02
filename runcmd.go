@@ -1,6 +1,7 @@
 package main
 
 import (
+	"course/concurrency"
 	"course/domain"
 	"course/entity"
 	"encoding/json"
@@ -138,7 +139,7 @@ func jsonDemo() {
 }
 
 func main() {
-	domain.RunInterface()
+	// domain.RunInterface()
 	// methodRecever()
 	// 	now := time.Now().UTC()
 	// 	var orders [2]entity.Order
@@ -175,4 +176,7 @@ func main() {
 	// 	// if err := run(); err != nil {
 	// 	// 	fmt.Println(err)
 	// 	// }
+
+	// concurrency.RunCommonConcurrency()
+	concurrency.RunRWMutext()
 }
