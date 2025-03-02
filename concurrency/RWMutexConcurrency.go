@@ -2,12 +2,61 @@ package concurrency
 
 import (
 	"fmt"
+	"log"
 	"math"
 	"os"
 	"sync"
 	"text/tabwriter"
 	"time"
+
+	"github.com/google/uuid"
 )
+
+type ShareCounter struct {
+	counter int32
+}
+
+type RShare ShareCounter
+
+func valueOf(shareCounter *ShareCounter, transId string, lock sync.Locker, waitGroup *sync.WaitGroup) {
+	lock.Lock()
+	defer lock.Unlock()
+	defer waitGroup.Done()
+	log.Printf("[%v] Read Value Of ShareCounter: %v", transId, shareCounter.counter)
+}
+
+func increment(shareCounter *ShareCounter, number int32, transId string, lock sync.Locker, waitGroup *sync.WaitGroup) {
+	lock.Lock()
+	defer lock.Unlock()
+	defer waitGroup.Done()
+	shareCounter.counter = shareCounter.counter + number
+	log.Printf("[%v] Increment Success: %v", transId, number)
+}
+
+func RunRWMutextV2() {
+	waitGroup := &sync.WaitGroup{}
+	lock := sync.RWMutex{}
+	shareCounter := ShareCounter{}
+	transIds := make([]string, 0, 10)
+	transIds = append(transIds, uuid.New().String())
+	transIds = append(transIds, uuid.New().String())
+	transIds = append(transIds, uuid.New().String())
+	transIds = append(transIds, uuid.New().String())
+	transIds = append(transIds, uuid.New().String())
+	transIds = append(transIds, uuid.New().String())
+	transIds = append(transIds, uuid.New().String())
+
+	for index, transId := range transIds {
+		waitGroup.Add(1)
+		go increment(&shareCounter, int32(index), transId, &lock, waitGroup)
+	}
+
+	for _, transId := range transIds {
+		waitGroup.Add(1)
+		go valueOf(&shareCounter, transId, lock.RLocker(), waitGroup)
+	}
+	waitGroup.Wait()
+}
 
 func RunRWMutext() {
 	producer := func(wg *sync.WaitGroup, l sync.Locker) {
